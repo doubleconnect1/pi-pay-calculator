@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pi Calculator</title>
+</head>
+<body>
+  <h1>Pi Exchange Calculator</h1>
+  <p>Enter the price of the product in USD:</p>
+  <input type="number" id="priceInput" placeholder="Enter price">
+  <button onclick="calculatePi()">Get Pi Amount</button>
+  <p id="result"></p>
+
+  <script>
+    async function calculatePi() {
+      const price = document.getElementById('priceInput').value;
+      const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=pi-network-defi&vs_currencies=usd');
+      const data = await response.json();
+      const piPrice = data['pi-network-defi'].usd;
+      const piAmount = price / piPrice;
+      document.getElementById('result').innerText = `You need ${piAmount.toFixed(2)} Pi.`;
+    }
+  </script>
+</body>
+</html>
